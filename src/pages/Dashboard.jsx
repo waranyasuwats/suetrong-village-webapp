@@ -78,7 +78,7 @@ export default function Dashboard({ user }) {
 
       {/* Parcel & Repair */}
       <div className="finance-grid">
-        <div className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '16px' }}>
+        <div className="glass-card" style={{ display: 'flex', alignItems: 'center', gap: '16px', padding: '16px', cursor: 'pointer' }} onClick={() => navigate('/parcels')}>
           <div style={{ background: 'rgba(59, 130, 246, 0.1)', padding: '12px', borderRadius: '12px' }}>
             <Package size={28} color="#3b82f6" />
           </div>
@@ -133,20 +133,20 @@ export default function Dashboard({ user }) {
 
       {/* Quick Menu Grid */}
       <div className="quick-menu-grid">
-        <Link to="#" className="menu-item">
+        <Link to="/contact" className="menu-item">
           <div className="menu-icon-wrapper">
             <MessageCircle size={28} color="#10b981" />
           </div>
           <span className="menu-item-text">ติดต่อนิติ</span>
         </Link>
-        <Link to="#" className="menu-item">
+        <Link to="/emergency" className="menu-item">
           <div className="menu-icon-wrapper">
             <Phone size={28} color="#ef4444" />
           </div>
           <span className="menu-item-text">ติดต่อฉุกเฉิน</span>
         </Link>
         
-        <Link to="#" className="menu-item">
+        <Link to="/visitors" className="menu-item">
           <div className="menu-icon-wrapper">
             <Contact size={28} color="#8b5cf6" />
           </div>
@@ -158,13 +158,13 @@ export default function Dashboard({ user }) {
           </div>
           <span className="menu-item-text">รายงานทั่วไป</span>
         </Link>
-        <Link to="#" className="menu-item">
+        <Link to="/surveys" className="menu-item">
           <div className="menu-icon-wrapper">
             <FileText size={28} color="#ec4899" />
           </div>
           <span className="menu-item-text">แบบสำรวจ</span>
         </Link>
-        <Link to="#" className="menu-item">
+        <Link to="/members" className="menu-item">
           <div className="menu-icon-wrapper">
             <Users size={28} color="#6366f1" />
           </div>

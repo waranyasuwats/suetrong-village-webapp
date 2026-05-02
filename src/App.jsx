@@ -9,6 +9,13 @@ import Accounting from './pages/Accounting';
 import Registration from './pages/Registration';
 import Reports from './pages/Reports';
 import ReportList from './pages/ReportList';
+import Parcels from './pages/Parcels';
+import Maintenance from './pages/Maintenance';
+import ContactJuristic from './pages/ContactJuristic';
+import Emergency from './pages/Emergency';
+import Visitors from './pages/Visitors';
+import Surveys from './pages/Surveys';
+import Members from './pages/Members';
 
 function MobileHeader({ onLogout }) {
   return (
@@ -99,6 +106,13 @@ function App() {
             <Route path="/dashboard" element={<Layout onLogout={handleLogout} role={user.role}><Dashboard user={user} /></Layout>} />
             <Route path="/billing" element={<Layout onLogout={handleLogout} role={user.role}><Billing user={user} /></Layout>} />
             <Route path="/announcements" element={<Layout onLogout={handleLogout} role={user.role}><Announcements user={user} /></Layout>} />
+            <Route path="/parcels" element={<Layout onLogout={handleLogout} role={user.role}><Parcels /></Layout>} />
+            <Route path="/maintenance" element={<Layout onLogout={handleLogout} role={user.role}><Maintenance /></Layout>} />
+            <Route path="/contact" element={<Layout onLogout={handleLogout} role={user.role}><ContactJuristic /></Layout>} />
+            <Route path="/emergency" element={<Layout onLogout={handleLogout} role={user.role}><Emergency /></Layout>} />
+            <Route path="/visitors" element={<Layout onLogout={handleLogout} role={user.role}><Visitors /></Layout>} />
+            <Route path="/surveys" element={<Layout onLogout={handleLogout} role={user.role}><Surveys /></Layout>} />
+            <Route path="/members" element={<Layout onLogout={handleLogout} role={user.role}><Members /></Layout>} />
             <Route path="/reports" element={<Layout onLogout={handleLogout} role={user.role}><Reports /></Layout>} />
             <Route path="/reports/:type" element={<Layout onLogout={handleLogout} role={user.role}><ReportList /></Layout>} />
             {user.role === 'admin' && (
