@@ -7,6 +7,10 @@ CREATE TABLE profiles (
   house_number TEXT,
   full_name TEXT,
   phone_number TEXT,
+  id_card_number TEXT,
+  id_card_address TEXT,
+  line_id TEXT,
+  pdpa_consented BOOLEAN DEFAULT false,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 

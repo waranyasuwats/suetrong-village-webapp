@@ -112,7 +112,7 @@ function App() {
             <Route path="/emergency" element={<Layout onLogout={handleLogout} role={user.role}><Emergency /></Layout>} />
             <Route path="/visitors" element={<Layout onLogout={handleLogout} role={user.role}><Visitors /></Layout>} />
             <Route path="/surveys" element={<Layout onLogout={handleLogout} role={user.role}><Surveys /></Layout>} />
-            <Route path="/members" element={<Layout onLogout={handleLogout} role={user.role}><Members /></Layout>} />
+            <Route path="/members" element={<Layout onLogout={handleLogout} role={user.role}><Members user={user} /></Layout>} />
             <Route path="/reports" element={<Layout onLogout={handleLogout} role={user.role}><Reports /></Layout>} />
             <Route path="/reports/:type" element={<Layout onLogout={handleLogout} role={user.role}><ReportList /></Layout>} />
             {user.role === 'admin' && (

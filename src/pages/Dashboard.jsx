@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { User, Package, Wrench, CreditCard, Receipt, Globe, Dumbbell, CalendarDays, MessageCircle, Phone, Contact, ClipboardList, FileText, Users, ChevronRight, Sun, Moon, CloudSun, Sunset, Home } from 'lucide-react';
+import { User, Package, Wrench, CreditCard, Receipt, Globe, Dumbbell, CalendarDays, MessageCircle, Phone, Contact, ClipboardList, FileText, Users, ChevronRight, Sun, Moon, CloudSun, Sunset, Home, Cloud, Star } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 
 export default function Dashboard({ user }) {
@@ -13,10 +13,10 @@ export default function Dashboard({ user }) {
 
   const getGreetingData = () => {
     const hour = currentTime.getHours();
-    if (hour >= 5 && hour < 12) return { text: 'สวัสดีตอนเช้า', icon: <CloudSun size={28} color="#ffffff" />, bg: 'linear-gradient(135deg, #38bdf8, #0ea5e9)' };
-    if (hour >= 12 && hour < 17) return { text: 'สวัสดีตอนบ่าย', icon: <Sun size={28} color="#ffffff" />, bg: 'linear-gradient(135deg, #0284c7, #0369a1)' };
-    if (hour >= 17 && hour < 20) return { text: 'สวัสดีตอนเย็น', icon: <Sunset size={28} color="#ffffff" />, bg: 'linear-gradient(135deg, #f59e0b, #ea580c)' };
-    return { text: 'ราตรีสวัสดิ์', icon: <Moon size={28} color="#fef08a" />, bg: 'linear-gradient(135deg, #1e1b4b, #0f172a)' };
+    if (hour >= 5 && hour < 12) return { type: 'morning', text: 'สวัสดีตอนเช้า', icon: <CloudSun size={28} color="#ffffff" />, bg: 'linear-gradient(135deg, #38bdf8, #0ea5e9)' };
+    if (hour >= 12 && hour < 17) return { type: 'afternoon', text: 'สวัสดีตอนบ่าย', icon: <Sun size={28} color="#ffffff" />, bg: 'linear-gradient(135deg, #0284c7, #0369a1)' };
+    if (hour >= 17 && hour < 20) return { type: 'evening', text: 'สวัสดีตอนเย็น', icon: <Sunset size={28} color="#ffffff" />, bg: 'linear-gradient(135deg, #f59e0b, #ea580c)' };
+    return { type: 'night', text: 'ราตรีสวัสดิ์', icon: <Moon size={28} color="#fef08a" />, bg: 'linear-gradient(135deg, #1e1b4b, #0f172a)' };
   };
 
   const greeting = getGreetingData();
@@ -37,10 +37,43 @@ export default function Dashboard({ user }) {
     <div>
       {/* Top Section */}
       <div className="top-dashboard-grid">
-        <div className="profile-card" style={{ gridColumn: '1 / 3', background: greeting.bg, flexDirection: 'column', alignItems: 'stretch' }}>
+        <div className="profile-card" style={{ gridColumn: '1 / 3', background: greeting.bg, flexDirection: 'column', alignItems: 'stretch', position: 'relative', overflow: 'hidden' }}>
           
+          {/* --- Decorative Floating Icons --- */}
+          <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, overflow: 'hidden', zIndex: 0, opacity: 0.15, pointerEvents: 'none' }}>
+             {greeting.type === 'morning' && (
+                <>
+                  <Sun size={140} style={{ position: 'absolute', top: '-30px', right: '-20px' }} />
+                  <Cloud size={80} style={{ position: 'absolute', top: '50px', right: '80px', opacity: 0.8 }} />
+                  <Cloud size={60} style={{ position: 'absolute', bottom: '-10px', left: '20px', opacity: 0.6 }} />
+                </>
+             )}
+             {greeting.type === 'afternoon' && (
+                <>
+                  <Sun size={180} style={{ position: 'absolute', top: '-40px', right: '-40px' }} />
+                  <Cloud size={50} style={{ position: 'absolute', bottom: '10px', left: '40px', opacity: 0.5 }} />
+                </>
+             )}
+             {greeting.type === 'evening' && (
+                <>
+                  <Sunset size={160} style={{ position: 'absolute', bottom: '-40px', right: '-20px' }} />
+                  <Cloud size={70} style={{ position: 'absolute', top: '10px', left: '30px', opacity: 0.5 }} />
+                  <Star size={24} style={{ position: 'absolute', top: '20px', right: '120px', opacity: 0.8 }} />
+                </>
+             )}
+             {greeting.type === 'night' && (
+                <>
+                  <Moon size={140} style={{ position: 'absolute', top: '-20px', right: '-20px', transform: 'rotate(-15deg)' }} />
+                  <Star size={30} style={{ position: 'absolute', top: '40px', left: '60px', opacity: 0.8 }} />
+                  <Star size={20} style={{ position: 'absolute', bottom: '20px', right: '100px', opacity: 0.6 }} />
+                  <Star size={16} style={{ position: 'absolute', top: '80px', left: '30px', opacity: 0.4 }} />
+                </>
+             )}
+          </div>
+          {/* ------------------------------- */}
+
           {/* Top Row: Greeting & Time */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '16px', marginBottom: '16px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid rgba(255,255,255,0.1)', paddingBottom: '16px', marginBottom: '16px', zIndex: 1, position: 'relative' }}>
              <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
                <div style={{ background: 'rgba(255,255,255,0.1)', padding: '12px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                   {greeting.icon}
@@ -56,7 +89,7 @@ export default function Dashboard({ user }) {
           </div>
 
           {/* Bottom Row: User Info */}
-          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px' }}>
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: '16px', zIndex: 1, position: 'relative' }}>
             <div className="profile-avatar" style={{ width: '56px', height: '56px' }}>
               <User size={32} color="#ffffff" />
             </div>
