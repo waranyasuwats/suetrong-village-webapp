@@ -4,11 +4,16 @@ import { supabase } from '../supabaseClient';
 import { createClient } from '@supabase/supabase-js';
 
 // Separate client for Auth to prevent Admin session from being overwritten
-const supabaseAuthClient = createClient(
-  import.meta.env.VITE_SUPABASE_URL,
-  import.meta.env.VITE_SUPABASE_ANON_KEY,
-  { auth: { persistSession: false, autoRefreshToken: false } }
-);
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+const supabaseAuthClient = (supabaseUrl && supabaseAnonKey)
+  ? createClient(
+      supabaseUrl,
+      supabaseAnonKey,
+      { auth: { persistSession: false, autoRefreshToken: false } }
+    )
+  : null;
 
 export default function Registration() {
   const [residents, setResidents] = useState([]);
